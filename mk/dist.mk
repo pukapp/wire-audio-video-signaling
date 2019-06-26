@@ -41,7 +41,7 @@ JOBS	:= -j8
 #--- Configuration ---
 
 ifeq ($(BUILDVERSION),)
-	BUILDVERSION := local
+	BUILDVERSION := 1.0
 endif
 
 # If DIST_ARCH isn't defined, we add all possible architectures. These are
@@ -76,8 +76,8 @@ BUILD_BALL_REL := avsball
 DIST_BUNDLE_LIB := \
 	{CFBundleName="$(DIST_BUNDLE_LIB_NAME)";\
 	CFBundleIdentifier="$(DIST_BUNDLE_LIB_IDENTIFIER)";\
-	CFBundleVersion="$(DIST_BUNDLE_VERSION)";\
-	CFBundleShortVersionString="$(DIST_BUNDLE_VERSION)";\
+	CFBundleVersion="1.0";\
+	CFBundleShortVersionString="1.0";\
 	CFBundleSignature="$(DIST_BUNDLE_SIGNATURE)";\
 	CFBundlePackageType="$(DIST_BUNDLE_PACKAGE_TYPE)";\
 	NSHumanReadableCopyright="$(DIST_BUNDLE_COPYRIGHT)";\
