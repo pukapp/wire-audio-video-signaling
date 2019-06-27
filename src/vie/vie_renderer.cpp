@@ -119,7 +119,7 @@ void ViERenderer::OnFrame(const webrtc::VideoFrame& video_frame)
 
 	switch(video_frame.rotation()) {
 	case webrtc::kVideoRotation_0:
-		avs_frame.rotation = 0;
+		avs_frame.rotation = 90;
 		break;
 
 	case webrtc::kVideoRotation_90:
