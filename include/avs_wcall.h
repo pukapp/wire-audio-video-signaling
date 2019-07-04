@@ -284,7 +284,7 @@ void wcall_config_update(void *wuser, int err, const char *json_str);
  * curr_time is the timestamp (synced as close as possible)
  * to the backend time when this function is called.
  */
-void wcall_recv_msg(void *wuser, const uint8_t *buf, size_t len,
+int wcall_recv_msg(void *wuser, const uint8_t *buf, size_t len,
 		    uint32_t curr_time, /* timestamp in seconds */
 		    uint32_t msg_time,  /* timestamp in seconds */
 		    const char *convid,

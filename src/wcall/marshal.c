@@ -334,7 +334,7 @@ static int md_enqueue(struct mq_data *md)
 
 
 AVS_EXPORT
-void wcall_recv_msg(void *wuser, const uint8_t *buf, size_t len,
+int wcall_recv_msg(void *wuser, const uint8_t *buf, size_t len,
 		    uint32_t curr_time,
 		    uint32_t msg_time,
 		    const char *convid,
@@ -346,18 +346,18 @@ void wcall_recv_msg(void *wuser, const uint8_t *buf, size_t len,
 	int err = 0;
 
 	if (!buf || len == 0 || !convid || !userid || !clientid)
-		return;
+		return 1000;
 
 	err = econn_message_decode(&msg, curr_time, msg_time,
 				   (const char *)buf, len);
 	if (err) {
 		warning("wcall: recv_msg: failed to decode\n");
-		return;
+		return 1000;
 	}
 
 	md = md_new(wuser, NULL, WCALL_MEV_RECV_MSG);
 	if (!md)
-		return;
+		return 1000;
 
 	md->u.recv_msg.msg = msg;
 	md->u.recv_msg.curr_time = curr_time;
@@ -372,11 +372,12 @@ void wcall_recv_msg(void *wuser, const uint8_t *buf, size_t len,
 	err = md_enqueue(md);
 	if (err)
 		goto out;
-			    
+
 
  out:
 	if (err)
 		mem_deref(md);
+	return err;
 }
 
 AVS_EXPORT
